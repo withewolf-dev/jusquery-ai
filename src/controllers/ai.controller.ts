@@ -25,7 +25,7 @@ class AIController {
         const context = await aiService.generateContext(schema);
         
         res.json({
-          message: 'Context generated and saved successfully',
+          message: 'Context generated and saved succassaaessfully',
           context
         });
       } catch (readError) {
@@ -48,30 +48,23 @@ class AIController {
 
   async executeQuery(req: Request, res: Response) {
     try {
-      const { query } = req.body as NLQueryRequest;
+      const { query, selectedOption } = req.body as { 
+        query: string; 
+        selectedOption?: string;
+      };
       
       if (!query) {
-        return res.status(400).json({
-          error: 'Query is required'
-        });
+        return res.status(400).json({ error: 'Query is required' });
       }
 
       const result = await aiService.generateMongoQuery(query);
       return res.json(result);
+
     } catch (error: any) {
       console.error('Query execution error:', error);
-      
-      if (error.message.includes('OPENAI_API_KEY')) {
-        return res.status(500).json({
-          error: 'Server configuration error',
-          details: 'AI service is not configured'
-        });
-      }
-
       res.status(500).json({
         error: 'Failed to execute query',
-        details: error.message,
-        type: error.name
+        details: error.message
       });
     }
   }

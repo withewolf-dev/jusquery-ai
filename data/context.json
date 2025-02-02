@@ -1,112 +1,157 @@
 {
-  "databaseName": "plutoDev",
-  "overallDescription": "The plutoDev database is designed to support a financial application, focusing on investment tracking, payment transactions, user management, and notifications. It includes a variety of collections that handle different aspects of the application, from user profiles and investment goals to transaction records and system notifications.",
-  "relationships": {
+  "overallDatabaseDescription": "The 'plutoDev' database is designed to manage a financial platform that supports investment goals, payment transactions, user management, and various financial services. It aims to facilitate transactions, track investments, and manage user interactions, while also providing notifications and maintaining historical records of activities.",
+  "relationshipsBetweenCollections": {
     "payment-transactions": {
-      "relatedTo": [
-        "users",
-        "goals",
-        "goal-investors"
-      ],
-      "description": "Records of financial transactions related to user investments, linked to specific users and their investment goals."
+      "relatedCollections": [
+        {
+          "collectionName": "goal-investors",
+          "relationship": "The 'goal_investor_id' field links payment transactions to specific investment goals and their respective investors."
+        },
+        {
+          "collectionName": "users",
+          "relationship": "The 'user_id' field in various collections connects payment transactions to users who initiate these transactions."
+        }
+      ]
     },
     "goals": {
-      "relatedTo": [
-        "users",
-        "goal-investors"
-      ],
-      "description": "Investment goals set by users, associated with specific user profiles and their investment activities."
+      "relatedCollections": [
+        {
+          "collectionName": "goal-investors",
+          "relationship": "The 'goal_id' field in 'goal-investors' references the 'goals' collection to associate investors with specific goals."
+        }
+      ]
     },
     "users": {
-      "relatedTo": [
-        "payment-transactions",
-        "goals",
-        "goal-investors",
-        "whatsapp-otps"
-      ],
-      "description": "User profiles containing personal and financial information, linked to their transactions, goals, and authentication details."
+      "relatedCollections": [
+        {
+          "collectionName": "goal-investors",
+          "relationship": "The 'user_id' field connects to users who are investing in various goals."
+        },
+        {
+          "collectionName": "notifications",
+          "relationship": "The 'user_id' field links notifications to the respective users."
+        }
+      ]
     },
-    "whatsapp-otps": {
-      "relatedTo": [
-        "users"
-      ],
-      "description": "OTP (One-Time Password) records for user authentication via WhatsApp, associated with user profiles."
-    },
-    "goal-investors": {
-      "relatedTo": [
-        "users",
-        "goals"
-      ],
-      "description": "Details of investments made by users towards specific goals, linking users to their investment goals."
+    "payout-statuses": {
+      "relatedCollections": [
+        {
+          "collectionName": "payments",
+          "relationship": "The 'merchant_transaction_id' can link to specific payment transactions for payout verification."
+        }
+      ]
     }
   },
-  "collections": [
-    {
-      "collectionName": "payment-transactions",
-      "purpose": "To track all financial transactions made by users, including investments, withdrawals, and fees.",
-      "importantFields": {
-        "retry_count": "Number of attempts made to process the transaction.",
-        "goal_investor_id": "Identifier linking the transaction to a specific investment goal.",
-        "amount_in_rupees": "Transaction amount in Indian Rupees.",
-        "status": "Current status of the transaction (e.g., success, failed).",
-        "payment_provider": "Service used to process the transaction."
+  "purposeOfEachCollection": {
+    "payment-transactions": "To record and manage all payment transactions, including retries, statuses, and associated fees.",
+    "goals": "To define investment goals that users can participate in, including details about minimum investment amounts and statuses.",
+    "users": "To store user profiles and their associated information, including verification statuses and preferences.",
+    "whatsapp-otps": "To manage one-time passwords sent to users for authentication via WhatsApp.",
+    "payout-statuses": "To track the statuses of payouts processed for users, including amounts and verification statuses.",
+    "story-views": "To record user interactions with stories, including view timestamps and durations.",
+    "story-comments": "To manage comments made by users on stories, including content and timestamps.",
+    "channels": "To define channels for user engagement, including their statuses and subscriber counts.",
+    "referrals": "To manage referral programs and track related conditions and statuses.",
+    "notifications": "To handle notifications sent to users regarding various events and updates.",
+    "gains": "To track financial gains associated with user investments and their performance over time.",
+    "user": "To manage user authentication details and profiles.",
+    "invite-codes": "To manage invite codes used for user registrations.",
+    "auth-tokens": "To handle authentication tokens for user sessions.",
+    "goal-investors": "To track user investments in specific goals, including amounts invested and withdrawn.",
+    "user_models": "To manage user model data for authentication and roles.",
+    "callbackrequests": "To manage callback requests made by users for assistance.",
+    "ledger-files": "To store records of ledger transactions and their statuses.",
+    "otps": "To manage OTPs for user verification.",
+    "stock-orders": "To manage stock orders placed by users, including order details and statuses.",
+    "payout-partner": "To manage payout partners and their associated details.",
+    "payouts": "To manage payout records associated with users and their transactions.",
+    "payout-partners": "To define payout partners and their banking details.",
+    "user-followers": "To manage relationships between users and their followers.",
+    "testCollection": "To store test-related transaction data.",
+    "notification-history": "To maintain a history of notifications sent to users.",
+    "translations": "To manage translations for various texts in the application.",
+    "transactions": "To record all financial transactions, including investments and payments.",
+    "goal-investors-notifications-histories": "To track notifications related to goal investors.",
+    "shorts": "To manage short video content and its associated metadata.",
+    "lotterytickets": "To manage lottery ticket records and their statuses.",
+    "rewards": "To manage reward programs and their associated details."
+  },
+  "descriptionOfImportantFields": {
+    "payment-transactions": {
+      "amount_in_rupees": "Total transaction amount in Indian Rupees.",
+      "status": "Current state of the transaction (e.g., pending, completed).",
+      "goal_investor_id": "Identifier for the investor involved in the transaction."
+    },
+    "goals": {
+      "min_investment_amt": "Minimum investment required to participate in the goal.",
+      "status": "Indicates whether the goal is currently active or inactive."
+    },
+    "users": {
+      "email": "User's email address for communication.",
+      "isActive": "Indicates if the user's account is active."
+    },
+    "payout-statuses": {
+      "payout_status": "Current status of the payout (e.g., pending, completed).",
+      "account_id": "Identifier for the account associated with the payout."
+    },
+    "transactions": {
+      "amount": "The monetary value involved in the transaction.",
+      "status": "Indicates the current state of the transaction."
+    }
+  },
+  "sampleQueries": {
+    "findAllActiveUsers": {
+      "query": {
+        "users": {
+          "isActive": true
+        }
       },
-      "sampleQueries": [
-        "Find all successful transactions for a specific user.",
-        "Calculate the total investment amount for a specific goal."
+      "description": "Fetches all users whose accounts are currently active."
+    },
+    "getTransactionsForUser": {
+      "query": {
+        "transactions": {
+          "userId": "exampleUserId"
+        }
+      },
+      "description": "Retrieves all transactions associated with a specific user."
+    },
+    "getGoalsByStatus": {
+      "query": {
+        "goals": {
+          "status": "active"
+        }
+      },
+      "description": "Fetches all active investment goals."
+    }
+  },
+  "disambiguationNotes": {
+    "transactionsVsGoalInvestors": "Both collections involve financial transactions, but 'transactions' focuses on the payment process, while 'goal-investors' tracks investments made by users in specific goals. To differentiate, use fields like 'transaction_type' in 'transactions' to filter payment-related queries and 'goal_id' in 'goal-investors' to focus on specific investment goals."
+  },
+  "intentMapping": {
+    "viewTransactionHistory": {
+      "mappedCollection": "transactions",
+      "fields": [
+        "userId",
+        "status",
+        "createdAt"
       ]
     },
-    {
-      "collectionName": "goals",
-      "purpose": "To manage and track investment goals set by users.",
-      "importantFields": {
-        "name": "Name of the investment goal.",
-        "min_investment_amt": "Minimum amount required to invest in this goal.",
-        "status": "Current status of the goal (active/inactive)."
-      },
-      "sampleQueries": [
-        "List all active investment goals.",
-        "Find the total amount invested towards a specific goal."
+    "investInGoal": {
+      "mappedCollection": "goal-investors",
+      "fields": [
+        "goal_id",
+        "user_id",
+        "amount_invested"
       ]
     },
-    {
-      "collectionName": "users",
-      "purpose": "To store and manage user profiles, including personal and financial information.",
-      "importantFields": {
-        "phoneNumber": "User's contact number, used for authentication and communication.",
-        "investorType": "Type of investor (e.g., individual, corporate).",
-        "financialChecklist": "User's financial preferences and checklist for investments."
-      },
-      "sampleQueries": [
-        "Retrieve the profile of a user by phone number.",
-        "Find all users with a specific investor type."
-      ]
-    },
-    {
-      "collectionName": "whatsapp-otps",
-      "purpose": "To manage OTPs sent to users for authentication via WhatsApp.",
-      "importantFields": {
-        "phoneNumber": "User's phone number to which the OTP was sent.",
-        "otp": "The One-Time Password sent to the user.",
-        "expireAt": "Expiration time of the OTP."
-      },
-      "sampleQueries": [
-        "Find the latest OTP sent to a specific phone number.",
-        "List all expired OTPs."
-      ]
-    },
-    {
-      "collectionName": "goal-investors",
-      "purpose": "To track investments made by users towards specific goals.",
-      "importantFields": {
-        "goal_id": "Identifier of the investment goal.",
-        "user_id": "Identifier of the user making the investment.",
-        "amount_invested": "Amount invested by the user towards the goal."
-      },
-      "sampleQueries": [
-        "Find all investments made by a specific user.",
-        "Calculate the total investment towards a specific goal."
+    "updateUserProfile": {
+      "mappedCollection": "users",
+      "fields": [
+        "userId",
+        "email",
+        "preferences"
       ]
     }
-  ]
+  }
 }

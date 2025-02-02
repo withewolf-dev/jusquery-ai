@@ -21,4 +21,16 @@ export interface QueryResult {
   mongoQuery: string;
   explanation: string;
   results: any[];
+}
+
+export interface ClarificationResponse {
+  needsClarification: boolean;
+  question?: string;
+  options?: string[];
+}
+
+export interface QueryIntent {
+  isAmbiguous: boolean;
+  type?: 'regular-gold' | 'goal-gold';
+  originalQuery: string;
 } 

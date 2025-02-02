@@ -1,6 +1,6 @@
 import { OpenAI } from 'openai';
 import { DatabaseSchema } from '../types/schema.types';
-import { DatabaseContext, QueryResult } from '../types/ai.types';
+import { DatabaseContext, QueryResult, QueryIntent } from '../types/ai.types';
 import * as fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -50,22 +50,36 @@ class AIService {
     const savedAnalysis = await this.loadSchemaAnalysis();
     const schemaToUse = savedAnalysis || schema;
 
-    const prompt = `Analyze this MongoDB schema and generate a comprehensive context:
+    const systemPrompt = `
+    You are an expert MongoDB schema analyst and AI assistant specialized in understanding complex database structures.
+    Your goal is to generate comprehensive database contexts that help convert natural language queries into accurate MongoDB queries.
+    Focus on identifying relationships, potential ambiguities, and providing clear disambiguation strategies when collections have overlapping data.
+    Ensure your output is structured, precise, and adheres to the DatabaseContext interface.
+    `;
+    
+    const userPrompt = `
+    Analyze this MongoDB schema and generate a comprehensive context:
     ${JSON.stringify(schemaToUse, null, 2)}
     
     Generate a detailed analysis including:
-    1. Overall database description
-    2. Relationships between collections
-    3. Purpose of each collection
-    4. Description of important fields
-    5. Sample queries that might be useful
+    1. **Overall Database Description:** High-level overview of the database's purpose.
+    2. **Relationships Between Collections:** Describe explicit and implicit relationships (foreign key-like, common fields, etc.).
+    3. **Purpose of Each Collection:** Define the primary goal of each collection.
+    4. **Description of Important Fields:** Focus on key fields for queries, filtering, and aggregation.
+    5. **Sample Queries:** Provide realistic MongoDB queries based on potential user needs.
+    6. **Disambiguation Notes:** Address overlapping data scenarios (e.g., transactions vs. goal-investor) and provide differentiation strategies.
+    7. **Intent Mapping:** Suggest how different user intents map to relevant collections.
     
-    Format the response as a JSON object matching the DatabaseContext interface.`;
+    Format the response as a JSON object matching the DatabaseContext interface.
+    `;
 
     const completion = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
       response_format: { type: "json_object" },
-      messages: [{ role: 'user', content: prompt }],
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userPrompt }
+      ],
       temperature: 0.5,
     }).catch(error => {
       console.error('Error generating context:', error);
@@ -81,18 +95,14 @@ class AIService {
 
   async generateMongoQuery(query: string): Promise<QueryResult> {
     try {
-      // Get context and schema
       const context = JSON.parse(await fs.readFile(this.contextPath, 'utf-8'));
       const savedAnalysis = await this.loadSchemaAnalysis();
       const schema = savedAnalysis || JSON.parse(await fs.readFile(this.schemaPath, 'utf-8'));
 
-      // Generate query using AI
+
       const response = await generateAIResponse(query, context, schema);
-      
-      // Parse the query
+      console.log('generateAIResponse()->:', response);
       const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
-      
-      // Execute the query
       const results = await executeMongoQuery(collectionName, operation, params);
 
       return {
@@ -109,6 +119,8 @@ class AIService {
       };
     }
   }
+
+  
 
   async testOpenAI(): Promise<any> {
     const systemPrompt = `The user will provide some exam text. Please parse the "question" and "answer" and output them in JSON format. 
@@ -154,6 +166,112 @@ EXAMPLE JSON OUTPUT:
       throw new Error(`OpenAI test failed: ${error.message}`);
     }
   }
+
+  async  enrichFieldsWithOpenAI(fields: any, collectionName: string) {
+    const systemPrompt = `
+      You are a MongoDB schema analysis expert. Your task is to analyze database fields and provide:
+      1. Semantic Meaning: A concise, database-agnostic description of what each field represents, based on its name, data type, and structure.
+      2. Importance (1-10): A numeric score representing how critical the field might be for querying, filtering, or data analysis.
+      3. Tags: A set of generic, descriptive tags that categorize the field (e.g., "identifier", "status", "financial", "metadata", "user_info", "transaction_data").
+  
+      Ensure the output is strictly valid JSON following the provided format.
+    `;
+  
+    const userPrompt = `
+      Analyze the following fields in the "${collectionName}" collection:
+      ${JSON.stringify(fields, null, 2)}
+  
+      For each field, return:
+      - field: Name of the field
+      - semanticMeaning: A concise description of the field's purpose
+      - importance: A numeric value between 1-10 representing the field's importance
+      - tags: Relevant tags as an array
+  
+      Format the response as a JSON array like:
+      [
+        {
+          "field": "status",
+          "semanticMeaning": "Indicates the current state of a record",
+          "importance": 9,
+          "tags": ["status", "record_state", "workflow"]
+        },
+        {
+          "field": "amount",
+          "semanticMeaning": "Represents a monetary value",
+          "importance": 8,
+          "tags": ["financial", "currency", "transaction_value"]
+        }
+      ]
+    `;
+  
+    const functions = [
+      {
+        name: "enrichField",
+        description: "Enriches fields with semantic meaning, importance, and tags.",
+        parameters: {
+          type: "object",
+          properties: {
+            enrichedFields: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: { type: "string" },
+                  semanticMeaning: { type: "string" },
+                  importance: { type: "integer", minimum: 1, maximum: 10 },
+                  tags: { type: "array", items: { type: "string" } }
+                },
+                required: ["field", "semanticMeaning", "importance", "tags"]
+              }
+            }
+          },
+          required: ["enrichedFields"]
+        }
+      }
+    ];
+  
+    try {
+      const completion = await this.openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        functions,
+        function_call: { name: "enrichField" },
+        temperature: 0.3
+      });
+  
+      return completion.choices[0]?.message?.function_call?.arguments
+        ? JSON.parse(completion.choices[0].message.function_call.arguments).enrichedFields
+        : [];
+  
+    } catch (error: unknown) {
+      console.error('Error enriching fields:', error);
+  
+      // Type checking to handle errors safely
+      if (error instanceof Error) {
+        try {
+          const fallbackResponse = (error as any).response?.data?.choices?.[0]?.message?.content;
+  
+          if (fallbackResponse) {
+            const fixedContent = fallbackResponse
+              .replace(/(\w+):/g, '"$1":')    // Add quotes around property names
+              .replace(/,\s*}/g, '}')         // Remove trailing commas
+              .replace(/,\s*]/g, ']');        // Fix arrays
+  
+            return JSON.parse(fixedContent);
+          }
+        } catch (fallbackError) {
+          console.error('Failed to fix JSON:', fallbackError);
+          throw fallbackError;
+        }
+      }
+  
+      throw error; // Re-throw if not an instance of Error
+    }
+  }  
+  
 }
 
 // Create instance only if environment variables are properly loaded

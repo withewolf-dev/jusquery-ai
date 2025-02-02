@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { DatabaseConfig, DatabaseSchema, CollectionSchema, FieldInfo } from '../types/schema.types';
-
+import aiService from './ai.service';
 class SchemaService {
   private async getFieldType(value: any): Promise<FieldInfo> {
     if (value === null) return { type: 'null' };
@@ -75,23 +75,28 @@ class SchemaService {
       totalDocuments
     };
   }
-
   async analyzeDatabase(config: DatabaseConfig): Promise<DatabaseSchema> {
     const client = new MongoClient(config.uri);
-    
+  
     try {
       await client.connect();
       const db = client.db();
       const collections = await db.listCollections().toArray();
-      
       const collectionSchemas: CollectionSchema[] = [];
-      
+  
       for (const collection of collections) {
         const collectionObj = db.collection(collection.name);
         const schema = await this.analyzeCollection(collectionObj, collection.name);
+  
+        // Enrich fields dynamically using OpenAI
+        console.log('Analyzing collection:', collection.name);
+        const enrichedFields = await aiService.enrichFieldsWithOpenAI(schema.fields, collection.name);
+        schema.fields = enrichedFields;
+        console.log('Enriched fields:', schema.fields);
         collectionSchemas.push(schema);
+        console.log('PUSHED');
       }
-
+  
       return {
         databaseName: db.databaseName,
         collections: collectionSchemas
@@ -100,6 +105,32 @@ class SchemaService {
       await client.close();
     }
   }
+  
+
+  // async analyzeDatabase(config: DatabaseConfig): Promise<DatabaseSchema> {
+  //   const client = new MongoClient(config.uri);
+    
+  //   try {
+  //     await client.connect();
+  //     const db = client.db();
+  //     const collections = await db.listCollections().toArray();
+      
+  //     const collectionSchemas: CollectionSchema[] = [];
+      
+  //     for (const collection of collections) {
+  //       const collectionObj = db.collection(collection.name);
+  //       const schema = await this.analyzeCollection(collectionObj, collection.name);
+  //       collectionSchemas.push(schema);
+  //     }
+
+  //     return {
+  //       databaseName: db.databaseName,
+  //       collections: collectionSchemas
+  //     };
+  //   } finally {
+  //     await client.close();
+  //   }
+  // }
 }
 
 export default new SchemaService(); 
