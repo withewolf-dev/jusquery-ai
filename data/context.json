@@ -1,0 +1,112 @@
+{
+  "databaseName": "plutoDev",
+  "overallDescription": "The plutoDev database is designed to support a financial application, focusing on investment tracking, payment transactions, user management, and notifications. It includes a variety of collections that handle different aspects of the application, from user profiles and investment goals to transaction records and system notifications.",
+  "relationships": {
+    "payment-transactions": {
+      "relatedTo": [
+        "users",
+        "goals",
+        "goal-investors"
+      ],
+      "description": "Records of financial transactions related to user investments, linked to specific users and their investment goals."
+    },
+    "goals": {
+      "relatedTo": [
+        "users",
+        "goal-investors"
+      ],
+      "description": "Investment goals set by users, associated with specific user profiles and their investment activities."
+    },
+    "users": {
+      "relatedTo": [
+        "payment-transactions",
+        "goals",
+        "goal-investors",
+        "whatsapp-otps"
+      ],
+      "description": "User profiles containing personal and financial information, linked to their transactions, goals, and authentication details."
+    },
+    "whatsapp-otps": {
+      "relatedTo": [
+        "users"
+      ],
+      "description": "OTP (One-Time Password) records for user authentication via WhatsApp, associated with user profiles."
+    },
+    "goal-investors": {
+      "relatedTo": [
+        "users",
+        "goals"
+      ],
+      "description": "Details of investments made by users towards specific goals, linking users to their investment goals."
+    }
+  },
+  "collections": [
+    {
+      "collectionName": "payment-transactions",
+      "purpose": "To track all financial transactions made by users, including investments, withdrawals, and fees.",
+      "importantFields": {
+        "retry_count": "Number of attempts made to process the transaction.",
+        "goal_investor_id": "Identifier linking the transaction to a specific investment goal.",
+        "amount_in_rupees": "Transaction amount in Indian Rupees.",
+        "status": "Current status of the transaction (e.g., success, failed).",
+        "payment_provider": "Service used to process the transaction."
+      },
+      "sampleQueries": [
+        "Find all successful transactions for a specific user.",
+        "Calculate the total investment amount for a specific goal."
+      ]
+    },
+    {
+      "collectionName": "goals",
+      "purpose": "To manage and track investment goals set by users.",
+      "importantFields": {
+        "name": "Name of the investment goal.",
+        "min_investment_amt": "Minimum amount required to invest in this goal.",
+        "status": "Current status of the goal (active/inactive)."
+      },
+      "sampleQueries": [
+        "List all active investment goals.",
+        "Find the total amount invested towards a specific goal."
+      ]
+    },
+    {
+      "collectionName": "users",
+      "purpose": "To store and manage user profiles, including personal and financial information.",
+      "importantFields": {
+        "phoneNumber": "User's contact number, used for authentication and communication.",
+        "investorType": "Type of investor (e.g., individual, corporate).",
+        "financialChecklist": "User's financial preferences and checklist for investments."
+      },
+      "sampleQueries": [
+        "Retrieve the profile of a user by phone number.",
+        "Find all users with a specific investor type."
+      ]
+    },
+    {
+      "collectionName": "whatsapp-otps",
+      "purpose": "To manage OTPs sent to users for authentication via WhatsApp.",
+      "importantFields": {
+        "phoneNumber": "User's phone number to which the OTP was sent.",
+        "otp": "The One-Time Password sent to the user.",
+        "expireAt": "Expiration time of the OTP."
+      },
+      "sampleQueries": [
+        "Find the latest OTP sent to a specific phone number.",
+        "List all expired OTPs."
+      ]
+    },
+    {
+      "collectionName": "goal-investors",
+      "purpose": "To track investments made by users towards specific goals.",
+      "importantFields": {
+        "goal_id": "Identifier of the investment goal.",
+        "user_id": "Identifier of the user making the investment.",
+        "amount_invested": "Amount invested by the user towards the goal."
+      },
+      "sampleQueries": [
+        "Find all investments made by a specific user.",
+        "Calculate the total investment towards a specific goal."
+      ]
+    }
+  ]
+}

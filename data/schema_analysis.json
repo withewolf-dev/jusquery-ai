@@ -1,0 +1,4939 @@
+{
+  "databaseName": "plutoDev",
+  "collections": [
+    {
+      "collectionName": "payment-transactions",
+      "fields": {
+        "retry_count": {
+          "type": "number",
+          "required": true
+        },
+        "goal_investor_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "amount_in_rupees": {
+          "type": "number",
+          "required": true
+        },
+        "amount_in_rupees_excluding_taxes": {
+          "type": "number",
+          "required": true
+        },
+        "processing_fee": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "recurring_count": {
+          "type": "number",
+          "required": true
+        },
+        "payment_provider": {
+          "type": "string",
+          "required": true
+        },
+        "transaction_meta_data": {
+          "type": "object",
+          "properties": {
+            "phonePeSubscriptionStatus": {
+              "type": "object",
+              "properties": {
+                "merchantSubscriptionId": {
+                  "type": "string"
+                },
+                "subscriptionId": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "validUpto": {
+                  "type": "string"
+                },
+                "isSupportedApp": {
+                  "type": "boolean"
+                },
+                "isSupportedUser": {
+                  "type": "boolean"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "subscriptionId": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "string"
+                    },
+                    "validUpto": {
+                      "type": "string"
+                    },
+                    "isSupportedApp": {
+                      "type": "boolean"
+                    },
+                    "isSupportedUser": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "authSubscriptionStatus": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "merchantId": {
+                      "type": "string"
+                    },
+                    "authRequestId": {
+                      "type": "string"
+                    },
+                    "transactionDetails": {
+                      "type": "object",
+                      "properties": {
+                        "providerReferenceId": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "type": "number"
+                        },
+                        "state": {
+                          "type": "string"
+                        },
+                        "responseCode": {
+                          "type": "string"
+                        },
+                        "payResponseCode": {
+                          "type": "string"
+                        },
+                        "paymentModes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "mode": {
+                                "type": "string"
+                              },
+                              "amount": {
+                                "type": "number"
+                              },
+                              "maskedAccountNumber": {
+                                "type": "string"
+                              },
+                              "ifsc": {
+                                "type": "string"
+                              },
+                              "utr": {
+                                "type": "string"
+                              },
+                              "umn": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "subscriptionDetails": {
+                      "type": "object",
+                      "properties": {
+                        "subscriptionId": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "internalStatus": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "gold_purchase_result": {
+          "type": "object",
+          "properties": {
+            "augmontTransactionData": {
+              "type": "object",
+              "properties": {
+                "statusCode": {
+                  "type": "number"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "totalAmount": {
+                          "type": "string"
+                        },
+                        "preTaxAmount": {
+                          "type": "string"
+                        },
+                        "metalType": {
+                          "type": "string"
+                        },
+                        "rate": {
+                          "type": "string"
+                        },
+                        "uniqueId": {
+                          "type": "string"
+                        },
+                        "transactionId": {
+                          "type": "string"
+                        },
+                        "userName": {
+                          "type": "string"
+                        },
+                        "merchantTransactionId": {
+                          "type": "string"
+                        },
+                        "mobileNumber": {
+                          "type": "string"
+                        },
+                        "goldBalance": {
+                          "type": "string"
+                        },
+                        "silverBalance": {
+                          "type": "string"
+                        },
+                        "taxes": {
+                          "type": "object",
+                          "properties": {
+                            "totalTaxAmount": {
+                              "type": "string"
+                            },
+                            "taxSplit": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "type": {
+                                    "type": "string"
+                                  },
+                                  "taxPerc": {
+                                    "type": "string"
+                                  },
+                                  "taxAmount": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "invoiceNumber": {
+                          "type": "string"
+                        },
+                        "referenceType": {
+                          "type": "null"
+                        },
+                        "referenceId": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "date": {
+              "type": "number"
+            },
+            "logs": {
+              "type": "object",
+              "properties": {
+                "assetStatusLog": {
+                  "type": "date"
+                }
+              }
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "offer_id": {
+          "type": "null",
+          "required": true
+        },
+        "payment_transaction_type": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "status_logs": {
+          "type": "array",
+          "items": {
+            "type": "unknown"
+          },
+          "required": true
+        }
+      },
+      "totalDocuments": 1781
+    },
+    {
+      "collectionName": "goals",
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "min_investment_amt": {
+          "type": "number",
+          "required": true
+        },
+        "min_goal_amt": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "boolean",
+          "required": true
+        },
+        "image": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "gains_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "icon": {
+          "type": "string",
+          "required": true
+        },
+        "goal_name": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "totalDocuments": 9
+    },
+    {
+      "collectionName": "users",
+      "fields": {
+        "investorbankDetailsLB": {
+          "type": "boolean",
+          "required": true
+        },
+        "language": {
+          "type": "string",
+          "required": true
+        },
+        "newUser": {
+          "type": "boolean",
+          "required": true
+        },
+        "kyc": {
+          "type": "boolean",
+          "required": true
+        },
+        "panVerified": {
+          "type": "boolean",
+          "required": true
+        },
+        "isActive": {
+          "type": "boolean",
+          "required": true
+        },
+        "lbUserVerified": {
+          "type": "boolean",
+          "required": true
+        },
+        "notificationCount": {
+          "type": "number",
+          "required": true
+        },
+        "augmontUserSet": {
+          "type": "boolean",
+          "required": true
+        },
+        "bankAccountDetailLbVerified": {
+          "type": "boolean",
+          "required": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "firebaseUID": {
+          "type": "string",
+          "required": false
+        },
+        "investorType": {
+          "type": "string",
+          "required": true
+        },
+        "lbUserId": {
+          "type": "string",
+          "required": false
+        },
+        "financialChecklist": {
+          "type": "object",
+          "properties": {
+            "conservative": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "allocationPercentage": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "moderate": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "allocationPercentage": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "aggressive": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "allocationPercentage": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "notificationDetails": {
+          "type": "object",
+          "properties": {
+            "welcomeMessage": {
+              "type": "boolean"
+            }
+          },
+          "required": true
+        },
+        "firebaseNotificationTokens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "object",
+                "properties": {
+                  "buffer": {
+                    "type": "object",
+                    "properties": {
+                      "0": {
+                        "type": "number"
+                      },
+                      "1": {
+                        "type": "number"
+                      },
+                      "2": {
+                        "type": "number"
+                      },
+                      "3": {
+                        "type": "number"
+                      },
+                      "4": {
+                        "type": "number"
+                      },
+                      "5": {
+                        "type": "number"
+                      },
+                      "6": {
+                        "type": "number"
+                      },
+                      "7": {
+                        "type": "number"
+                      },
+                      "8": {
+                        "type": "number"
+                      },
+                      "9": {
+                        "type": "number"
+                      },
+                      "10": {
+                        "type": "number"
+                      },
+                      "11": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "token": {
+                "type": "string"
+              },
+              "deviceType": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "goals": {
+          "type": "array",
+          "items": {
+            "type": "unknown"
+          },
+          "required": true
+        },
+        "dependants": {
+          "type": "array",
+          "items": {
+            "type": "unknown"
+          },
+          "required": true
+        },
+        "plutoFixedInvestmentDetails": {
+          "type": "array",
+          "items": {
+            "type": "unknown"
+          },
+          "required": true
+        },
+        "plutoPlusInvestmentDetails": {
+          "type": "array",
+          "items": {
+            "type": "unknown"
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "referral": {
+          "type": "object",
+          "properties": {
+            "link": {
+              "type": "string"
+            },
+            "amountEarned": {
+              "type": "number"
+            },
+            "count": {
+              "type": "number"
+            }
+          },
+          "required": true
+        },
+        "email": {
+          "type": "string",
+          "required": false
+        },
+        "expense": {
+          "type": "number",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "required": false
+        },
+        "bankAccountDetail": {
+          "type": "object",
+          "properties": {
+            "ifsc": {
+              "type": "string"
+            },
+            "accountHolderName": {
+              "type": "string"
+            },
+            "bankAccountNumber": {
+              "type": "string"
+            },
+            "accountType": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "goldInvestmentDetails": {
+          "type": "object",
+          "properties": {
+            "averageBuyPrice": {
+              "type": "number"
+            },
+            "investedAmount": {
+              "type": "number"
+            },
+            "quantity": {
+              "type": "number"
+            }
+          },
+          "required": false
+        },
+        "referralInfo": {
+          "type": "object",
+          "properties": {
+            "link": {
+              "type": "null"
+            },
+            "amountEarned": {
+              "type": "number"
+            },
+            "count": {
+              "type": "number"
+            },
+            "referalCode": {
+              "type": "string"
+            },
+            "referredBy": {
+              "type": "null"
+            },
+            "_id": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "enableWhatsappNotification": {
+          "type": "boolean",
+          "required": false
+        },
+        "aadharData": {
+          "type": "object",
+          "properties": {
+            "ref_id": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "care_of": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            },
+            "dob": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "split_address": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "string"
+                },
+                "dist": {
+                  "type": "string"
+                },
+                "house": {
+                  "type": "string"
+                },
+                "landmark": {
+                  "type": "string"
+                },
+                "pincode": {
+                  "type": "string"
+                },
+                "po": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "street": {
+                  "type": "string"
+                },
+                "subdist": {
+                  "type": "string"
+                },
+                "vtc": {
+                  "type": "string"
+                }
+              }
+            },
+            "year_of_birth": {
+              "type": "string"
+            },
+            "mobile_hash": {
+              "type": "string"
+            },
+            "photo_link": {
+              "type": "string"
+            },
+            "aadhar": {
+              "type": "string"
+            }
+          },
+          "required": false
+        },
+        "fatherName": {
+          "type": "string",
+          "required": false
+        },
+        "panData": {
+          "type": "object",
+          "properties": {
+            "pan": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "reference_id": {
+              "type": "number"
+            },
+            "name_provided": {
+              "type": "string"
+            },
+            "registered_name": {
+              "type": "string"
+            },
+            "valid": {
+              "type": "boolean"
+            },
+            "message": {
+              "type": "string"
+            },
+            "aadhaar_seeding_status": {
+              "type": "string"
+            },
+            "last_updated_at": {
+              "type": "string"
+            },
+            "name_pan_card": {
+              "type": "string"
+            },
+            "pan_status": {
+              "type": "string"
+            },
+            "aadhaar_seeding_status_desc": {
+              "type": "string"
+            }
+          },
+          "required": false
+        },
+        "activeSilverSip": {
+          "type": "null",
+          "required": false
+        },
+        "monthlySavableAmount": {
+          "type": "number",
+          "required": false
+        },
+        "silverInvestmentDetails": {
+          "type": "object",
+          "properties": {
+            "averageBuyPrice": {
+              "type": "number"
+            },
+            "investedAmount": {
+              "type": "number"
+            },
+            "myLastUpdatedSilverValue": {
+              "type": "number"
+            },
+            "quantity": {
+              "type": "number"
+            },
+            "silverValueLastSyncedAt": {
+              "type": "date"
+            }
+          },
+          "required": false
+        },
+        "nominee": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "age": {
+              "type": "number"
+            },
+            "relation": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            }
+          },
+          "required": false
+        },
+        "notifiedUserForSmartSavings": {
+          "type": "boolean",
+          "required": false
+        },
+        "activeGoldSip": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "address": {
+          "type": "null",
+          "required": false
+        },
+        "dob": {
+          "type": "null",
+          "required": false
+        },
+        "gender": {
+          "type": "string",
+          "required": false
+        },
+        "augmontUserKycApproved": {
+          "type": "boolean",
+          "required": false
+        },
+        "preferenceDetails": {
+          "type": "object",
+          "properties": {
+            "incomeRange": {
+              "type": "null"
+            },
+            "myWork": {
+              "type": "string"
+            },
+            "maritalStatus": {
+              "type": "null"
+            },
+            "currentlySavingIn": {
+              "type": "null"
+            },
+            "savingsFromIncome": {
+              "type": "null"
+            },
+            "reasonForSaving": {
+              "type": "null"
+            },
+            "prefLangOfCom": {
+              "type": "null"
+            },
+            "likeInplutoMoneyFeature": {
+              "type": "null"
+            },
+            "dislikeInplutoMoneyFeature": {
+              "type": "null"
+            },
+            "featureLikeToAdd": {
+              "type": "null"
+            },
+            "feedback": {
+              "type": "null"
+            },
+            "anyOtherAppForSaving": {
+              "type": "null"
+            },
+            "recommendPlutoMoney": {
+              "type": "string"
+            },
+            "_id": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "activePlutoPlusSip": {
+          "type": "null",
+          "required": false
+        },
+        "source": {
+          "type": "string",
+          "required": false
+        },
+        "referredBy": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 277
+    },
+    {
+      "collectionName": "whatsapp-otps",
+      "fields": {
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "expireAt": {
+          "type": "date",
+          "required": true
+        },
+        "otp": {
+          "type": "string",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        }
+      },
+      "totalDocuments": 3
+    },
+    {
+      "collectionName": "payout-statuses",
+      "fields": {
+        "verified": {
+          "type": "boolean",
+          "required": true
+        },
+        "merchant_transaction_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "buy_rate": {
+          "type": "string",
+          "required": true
+        },
+        "sell_rate": {
+          "type": "null",
+          "required": true
+        },
+        "buy_amount": {
+          "type": "number",
+          "required": true
+        },
+        "tax_amount": {
+          "type": "number",
+          "required": true
+        },
+        "transaction_type": {
+          "type": "string",
+          "required": true
+        },
+        "payout_status": {
+          "type": "string",
+          "required": true
+        },
+        "payout_date": {
+          "type": "string",
+          "required": true
+        },
+        "account_id": {
+          "type": "string",
+          "required": true
+        },
+        "account_name": {
+          "type": "string",
+          "required": true
+        },
+        "unique_id": {
+          "type": "string",
+          "required": true
+        },
+        "user_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "phone_number": {
+          "type": "string",
+          "required": true
+        },
+        "state": {
+          "type": "string",
+          "required": true
+        },
+        "city": {
+          "type": "string",
+          "required": true
+        },
+        "pincode": {
+          "type": "number",
+          "required": true
+        },
+        "grams": {
+          "type": "number",
+          "required": true
+        },
+        "total_amount": {
+          "type": "number",
+          "required": true
+        },
+        "unit_type": {
+          "type": "string",
+          "required": true
+        },
+        "buy_date": {
+          "type": "date",
+          "required": false
+        },
+        "merchant_name": {
+          "type": "string",
+          "required": true
+        },
+        "transaction_status": {
+          "type": "string",
+          "required": true
+        },
+        "discount_applied": {
+          "type": "string",
+          "required": false
+        },
+        "utm_medium": {
+          "type": "string",
+          "required": true
+        },
+        "utm_source": {
+          "type": "string",
+          "required": true
+        },
+        "utm_campaign": {
+          "type": "string",
+          "required": true
+        },
+        "buy_type": {
+          "type": "string",
+          "required": false
+        },
+        "sip_reference_id": {
+          "type": "string",
+          "required": false
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "sell_date": {
+          "type": "date",
+          "required": false
+        }
+      },
+      "totalDocuments": 15
+    },
+    {
+      "collectionName": "user",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "story-views",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "story-comments",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "channels",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "referrals",
+      "fields": {
+        "active": {
+          "type": "boolean",
+          "required": true
+        },
+        "termsAndConditionText": {
+          "type": "string",
+          "required": true
+        },
+        "termsAndConditionTextHi": {
+          "type": "string",
+          "required": true
+        },
+        "maturityDuration": {
+          "type": "string",
+          "required": true
+        },
+        "refereeInvestmentConditions": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "investmentType": {
+              "type": "string"
+            },
+            "minimumAmount": {
+              "type": "string"
+            },
+            "maximumAmount": {
+              "type": "string"
+            },
+            "investmentDuration": {
+              "type": "string"
+            },
+            "totalAmountExpected": {
+              "type": "string"
+            },
+            "minimumInvestmentDuration": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "referrerInvestmentConditions": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "investmentType": {
+              "type": "string"
+            },
+            "minimumAmount": {
+              "type": "string"
+            },
+            "maximumAmount": {
+              "type": "string"
+            },
+            "investmentDuration": {
+              "type": "string"
+            },
+            "totalAmountExpected": {
+              "type": "string"
+            },
+            "minimumInvestmentDuration": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "payoutMedium": {
+          "type": "string",
+          "required": true
+        },
+        "entityType": {
+          "type": "string",
+          "required": true
+        },
+        "allotmentFrequency": {
+          "type": "string",
+          "required": true
+        },
+        "referralAmount": {
+          "type": "string",
+          "required": true
+        },
+        "allotmentFractionAmount": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "totalDocuments": 2
+    },
+    {
+      "collectionName": "notifications",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "gains",
+      "fields": {
+        "tenures": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "gain": {
+                "type": "number"
+              }
+            }
+          },
+          "required": true
+        },
+        "total_gain": {
+          "type": "number",
+          "required": true
+        },
+        "total_gain_percent": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "payment_schedule": {
+          "type": "string",
+          "required": true
+        },
+        "starting_amount": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 5
+    },
+    {
+      "collectionName": "invite-codes",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "auth-tokens",
+      "fields": {
+        "type": {
+          "type": "string",
+          "required": true
+        },
+        "token": {
+          "type": "string",
+          "required": true
+        },
+        "expiresAt": {
+          "type": "date",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 1
+    },
+    {
+      "collectionName": "goal-investors",
+      "fields": {
+        "goal_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "state": {
+          "type": "string",
+          "required": true
+        },
+        "user_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "amount_invested": {
+          "type": "number",
+          "required": true
+        },
+        "amount_withdrawn": {
+          "type": "number",
+          "required": true
+        },
+        "investment_type": {
+          "type": "string",
+          "required": true
+        },
+        "target_year": {
+          "type": "number",
+          "required": true
+        },
+        "total_gain": {
+          "type": "number",
+          "required": true
+        },
+        "target_amount": {
+          "type": "number",
+          "required": true
+        },
+        "day_of_month": {
+          "type": "null",
+          "required": true
+        },
+        "regular_investment_amount": {
+          "type": "number",
+          "required": true
+        },
+        "day_of_week": {
+          "type": "string",
+          "required": true
+        },
+        "payment_schedule": {
+          "type": "string",
+          "required": true
+        },
+        "subscription_id": {
+          "type": "string",
+          "required": true
+        },
+        "merchant_subscription_id": {
+          "type": "string",
+          "required": true
+        },
+        "goal_bought_in_gms": {
+          "type": "number",
+          "required": true
+        },
+        "sip_state": {
+          "type": "string",
+          "required": false
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 362
+    },
+    {
+      "collectionName": "user_models",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "callbackrequests",
+      "fields": {
+        "emailSent": {
+          "type": "boolean",
+          "required": true
+        },
+        "whatsAppMsgSent": {
+          "type": "boolean",
+          "required": true
+        },
+        "attended": {
+          "type": "boolean",
+          "required": true
+        },
+        "requestForAsset": {
+          "type": "string",
+          "required": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "required": false
+        },
+        "email": {
+          "type": "string",
+          "required": false
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 78
+    },
+    {
+      "collectionName": "ledger-files",
+      "fields": {
+        "date": {
+          "type": "string",
+          "required": true
+        },
+        "transaction_type": {
+          "type": "string",
+          "required": true
+        },
+        "filePath": {
+          "type": "string",
+          "required": true
+        },
+        "s3Url": {
+          "type": "string",
+          "required": true
+        },
+        "cdnUrl": {
+          "type": "string",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "total_amount": {
+          "type": "number",
+          "required": false
+        },
+        "total_amount_unverified": {
+          "type": "number",
+          "required": false
+        },
+        "payout_response": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "number"
+            },
+            "message": {
+              "type": "string"
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "decentroTxnId": {
+                  "type": "string"
+                },
+                "transferType": {
+                  "type": "string"
+                },
+                "responseCode": {
+                  "type": "string"
+                },
+                "newBalance": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 486
+    },
+    {
+      "collectionName": "otps",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "stock-orders",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "payout-partner",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "payouts",
+      "fields": {
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "provider": {
+          "type": "string",
+          "required": false
+        },
+        "total": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "extraCharges": {
+          "type": "number",
+          "required": true
+        },
+        "beneficiaryId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "paymentTransactionId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "decentroResponse": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "decentroTxnId": {
+              "type": "string"
+            },
+            "transferType": {
+              "type": "string"
+            },
+            "responseCode": {
+              "type": "string"
+            },
+            "newBalance": {
+              "type": "number"
+            }
+          },
+          "required": false
+        },
+        "transactionId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 61
+    },
+    {
+      "collectionName": "payout-partners",
+      "fields": {
+        "active": {
+          "type": "boolean",
+          "required": true
+        },
+        "partner_name": {
+          "type": "string",
+          "required": true
+        },
+        "account_number": {
+          "type": "string",
+          "required": true
+        },
+        "ifsc_code": {
+          "type": "string",
+          "required": true
+        },
+        "beneficiary_name": {
+          "type": "string",
+          "required": true
+        },
+        "phone_number": {
+          "type": "string",
+          "required": true
+        },
+        "email": {
+          "type": "string",
+          "required": true
+        },
+        "transfer_type": {
+          "type": "string",
+          "required": true
+        },
+        "synced_with_decentro": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 1
+    },
+    {
+      "collectionName": "user-followers",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "testCollection",
+      "fields": {
+        "retryCount": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "paymentUpiApp": {
+          "type": "string",
+          "required": true
+        },
+        "transactionType": {
+          "type": "string",
+          "required": true
+        },
+        "amount": {
+          "type": "number",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "investmentType": {
+          "type": "string",
+          "required": true
+        },
+        "mode": {
+          "type": "string",
+          "required": true
+        },
+        "processingFee": {
+          "type": "string",
+          "required": true
+        },
+        "phonePeTransactionData": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "merchantTransactionId": {
+              "type": "string"
+            },
+            "notificationId": {
+              "type": "string"
+            },
+            "paymentState": {
+              "type": "string"
+            },
+            "responseCode": {
+              "type": "string"
+            },
+            "transactionDetails": {
+              "type": "object",
+              "properties": {
+                "providerReferenceId": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "payResponseCode": {
+                  "type": "string"
+                },
+                "paymentModes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "object",
+                        "properties": {
+                          "buffer": {
+                            "type": "object",
+                            "properties": {
+                              "0": {
+                                "type": "number"
+                              },
+                              "1": {
+                                "type": "number"
+                              },
+                              "2": {
+                                "type": "number"
+                              },
+                              "3": {
+                                "type": "number"
+                              },
+                              "4": {
+                                "type": "number"
+                              },
+                              "5": {
+                                "type": "number"
+                              },
+                              "6": {
+                                "type": "number"
+                              },
+                              "7": {
+                                "type": "number"
+                              },
+                              "8": {
+                                "type": "number"
+                              },
+                              "9": {
+                                "type": "number"
+                              },
+                              "10": {
+                                "type": "number"
+                              },
+                              "11": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "mode": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      },
+                      "utr": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "subscriptionDetails": {
+              "type": "object",
+              "properties": {
+                "subscriptionId": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                }
+              }
+            },
+            "notificationDetails": {
+              "type": "object",
+              "properties": {
+                "notificationId": {
+                  "type": "string"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "notifiedAt": {
+                  "type": "string"
+                },
+                "validAfter": {
+                  "type": "string"
+                },
+                "validUpto": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "sipId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "augmontTransactionData": {
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "number"
+            },
+            "totalAmount": {
+              "type": "number"
+            },
+            "preTaxAmount": {
+              "type": "number"
+            },
+            "metalType": {
+              "type": "string"
+            },
+            "rate": {
+              "type": "string"
+            },
+            "uniqueId": {
+              "type": "string"
+            },
+            "transactionId": {
+              "type": "string"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "merchantTransactionId": {
+              "type": "string"
+            },
+            "mobileNumber": {
+              "type": "string"
+            },
+            "goldBalance": {
+              "type": "string"
+            },
+            "silverBalance": {
+              "type": "string"
+            },
+            "taxes": {
+              "type": "object",
+              "properties": {
+                "totalTaxAmount": {
+                  "type": "string"
+                },
+                "taxSplit": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "taxPerc": {
+                        "type": "number"
+                      },
+                      "taxAmount": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "invoiceNumber": {
+              "type": "string"
+            },
+            "referenceType": {
+              "type": "null"
+            },
+            "referenceId": {
+              "type": "null"
+            }
+          },
+          "required": true
+        },
+        "date": {
+          "type": "date",
+          "required": true
+        },
+        "logs": {
+          "type": "object",
+          "properties": {
+            "paymentGatewayStatusLog": {
+              "type": "date"
+            },
+            "assetStatusLog": {
+              "type": "date"
+            }
+          },
+          "required": true
+        },
+        "transactionSummary": {
+          "type": "object",
+          "properties": {
+            "totalInvestedAmount": {
+              "type": "number"
+            },
+            "totalWithdrawnAmount": {
+              "type": "number"
+            },
+            "lastTransactionDate": {
+              "type": "date"
+            },
+            "investmentType": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "offerData": {
+          "type": "object",
+          "properties": {
+            "offerId": {
+              "type": "null"
+            }
+          },
+          "required": false
+        },
+        "transactionRating": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "totalDocuments": 10
+    },
+    {
+      "collectionName": "offer",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "banners",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "goal-based-payouts",
+      "fields": {
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "provider": {
+          "type": "string",
+          "required": true
+        },
+        "total": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "extraCharges": {
+          "type": "number",
+          "required": true
+        },
+        "beneficiaryId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "paymentTransactionId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "decentroResponse": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "responseCode": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "decentroTxnId": {
+              "type": "string"
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 121
+    },
+    {
+      "collectionName": "token",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "usercontacts",
+      "fields": {
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        }
+      },
+      "totalDocuments": 34013
+    },
+    {
+      "collectionName": "bookmarks",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "referal",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "tokens",
+      "fields": {
+        "user_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "token": {
+          "type": "string",
+          "required": true
+        },
+        "device_type": {
+          "type": "string",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": false
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": false
+        }
+      },
+      "totalDocuments": 4
+    },
+    {
+      "collectionName": "payout-beneficiaries",
+      "fields": {
+        "active": {
+          "type": "boolean",
+          "required": true
+        },
+        "transferType": {
+          "type": "string",
+          "required": true
+        },
+        "accountNumber": {
+          "type": "string",
+          "required": true
+        },
+        "ifscCode": {
+          "type": "string",
+          "required": true
+        },
+        "beneficiaryName": {
+          "type": "string",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "email": {
+          "type": "string",
+          "required": true
+        },
+        "syncedWithDecentro": {
+          "type": "string",
+          "required": true
+        },
+        "decentroData": {
+          "type": "object",
+          "properties": {
+            "beneficiaryCode": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 1
+    },
+    {
+      "collectionName": "payments",
+      "fields": {
+        "user_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "retry_count": {
+          "type": "number",
+          "required": true
+        },
+        "goal_investor_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "transaction_type": {
+          "type": "string",
+          "required": true
+        },
+        "amount_in_paisa": {
+          "type": "number",
+          "required": true
+        },
+        "processing_fee": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "payment_upi_app": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 31
+    },
+    {
+      "collectionName": "usermodels",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "goldpriceschemas",
+      "fields": {
+        "goldPriceId": {
+          "type": "number",
+          "required": true
+        },
+        "date": {
+          "type": "date",
+          "required": true
+        },
+        "timestamp": {
+          "type": "number",
+          "required": true
+        },
+        "currency": {
+          "type": "string",
+          "required": true
+        },
+        "price": {
+          "type": "number",
+          "required": true
+        },
+        "prev_close_price": {
+          "type": "number",
+          "required": true
+        },
+        "price_gram_24k": {
+          "type": "number",
+          "required": true
+        },
+        "price_gram_22k": {
+          "type": "number",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 7
+    },
+    {
+      "collectionName": "channel-followers",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "traction-infos",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "bank-account-details",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "offers",
+      "fields": {
+        "recommend": {
+          "type": "boolean",
+          "required": true
+        },
+        "maturityDuration": {
+          "type": "number",
+          "required": true
+        },
+        "transactionType": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "lockinDuration": {
+          "type": "string",
+          "required": true
+        },
+        "minAmount": {
+          "type": "number",
+          "required": true
+        },
+        "maxAmount": {
+          "type": "number",
+          "required": true
+        },
+        "entityType": {
+          "type": "string",
+          "required": true
+        },
+        "allotmentFrequency": {
+          "type": "string",
+          "required": true
+        },
+        "offerAmount": {
+          "type": "string",
+          "required": true
+        },
+        "allotmentFractionAmount": {
+          "type": "string",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "recurringType": {
+          "type": "string",
+          "required": false
+        },
+        "expiryDate": {
+          "type": "date",
+          "required": true
+        },
+        "questionAnswerData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "offerClaimSteps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": false
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": false
+        },
+        "internal_test": {
+          "type": "string",
+          "required": false
+        },
+        "is_experiment": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "totalDocuments": 13
+    },
+    {
+      "collectionName": "ledger-files-transactions",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "payoutmodels",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "pre-approved-bonus",
+      "fields": {
+        "bonusPayoutType": {
+          "type": "string",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "marketingCampaignName": {
+          "type": "string",
+          "required": true
+        },
+        "amount": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 5
+    },
+    {
+      "collectionName": "goal",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "sips",
+      "fields": {
+        "amount": {
+          "type": "number",
+          "required": true
+        },
+        "amountType": {
+          "type": "string",
+          "required": true
+        },
+        "recurringCount": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "userAuthorization": {
+          "type": "boolean",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "frequency": {
+          "type": "string",
+          "required": true
+        },
+        "paymentGateway": {
+          "type": "string",
+          "required": true
+        },
+        "phonePeSubscriptionData": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "authWorkflowType": {
+              "type": "string"
+            },
+            "nextPaymentNotificationInitDate": {
+              "type": "date"
+            },
+            "merchantId": {
+              "type": "string"
+            },
+            "merchantUserId": {
+              "type": "string"
+            },
+            "paymentDate": {
+              "type": "string"
+            },
+            "frequency": {
+              "type": "string"
+            },
+            "merchantSubscriptionId": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "subscriptionId": {
+              "type": "string"
+            },
+            "validUpto": {
+              "type": "date"
+            },
+            "redirectType": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "subscriptionActive": {
+          "type": "string",
+          "required": false
+        },
+        "userUPIid": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "totalDocuments": 2550
+    },
+    {
+      "collectionName": "test-p-t",
+      "fields": {
+        "retry_count": {
+          "type": "number",
+          "required": true
+        },
+        "goal_investor_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "amount_in_rupees": {
+          "type": "number",
+          "required": true
+        },
+        "processing_fee": {
+          "type": "number",
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "recurring_count": {
+          "type": "number",
+          "required": true
+        },
+        "payment_provider": {
+          "type": "string",
+          "required": true
+        },
+        "transaction_meta_data": {
+          "type": "object",
+          "properties": {
+            "merchantSubscriptionId": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "subscriptionId": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "validUpto": {
+              "type": "number"
+            },
+            "isSupportedApp": {
+              "type": "boolean"
+            },
+            "isSupportedUser": {
+              "type": "boolean"
+            }
+          },
+          "required": true
+        },
+        "gold_purchase_result": {
+          "type": "null",
+          "required": true
+        },
+        "offer_id": {
+          "type": "null",
+          "required": true
+        },
+        "payment_transaction_type": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "amount_in_rupees_excluding_taxes": {
+          "type": "number",
+          "required": false
+        }
+      },
+      "totalDocuments": 66
+    },
+    {
+      "collectionName": "notification-history",
+      "fields": {
+        "notification_type": {
+          "type": "string",
+          "required": true
+        },
+        "goal_investor_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "amount": {
+          "type": "number",
+          "required": true
+        },
+        "gold_qty": {
+          "type": "number",
+          "required": true
+        },
+        "percentage": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 1
+    },
+    {
+      "collectionName": "translations",
+      "fields": {
+        "hindi": {
+          "type": "string",
+          "required": true
+        },
+        "english": {
+          "type": "string",
+          "required": true
+        },
+        "key": {
+          "type": "string",
+          "required": true
+        },
+        "font_size": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 1333
+    },
+    {
+      "collectionName": "transactions",
+      "fields": {
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "paymentUpiApp": {
+          "type": "string",
+          "required": true
+        },
+        "transactionType": {
+          "type": "string",
+          "required": true
+        },
+        "amount": {
+          "type": "number",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "investmentType": {
+          "type": "string",
+          "required": true
+        },
+        "mode": {
+          "type": "string",
+          "required": true
+        },
+        "processingFee": {
+          "type": "string",
+          "required": false
+        },
+        "phonePeTransactionData": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "merchantTransactionId": {
+              "type": "string"
+            }
+          },
+          "required": false
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "retryCount": {
+          "type": "number",
+          "required": false
+        },
+        "transactionRating": {
+          "type": "number",
+          "required": false
+        },
+        "plutoFixedLockInPeriod": {
+          "type": "string",
+          "required": false
+        },
+        "sipId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "lendboxTransactionData": {
+          "type": "object",
+          "properties": {
+            "walletOrderData": {
+              "type": "object",
+              "properties": {
+                "lbUserId": {
+                  "type": "number"
+                },
+                "amount": {
+                  "type": "number"
+                },
+                "txType": {
+                  "type": "string"
+                },
+                "paymentSource": {
+                  "type": "string"
+                },
+                "paymentMethod": {
+                  "type": "string"
+                },
+                "investmentType": {
+                  "type": "string"
+                },
+                "txId": {
+                  "type": "string"
+                },
+                "txTime": {
+                  "type": "string"
+                },
+                "productType": {
+                  "type": "string"
+                },
+                "investmentId": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "augmontTransactionDataSilver": {
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "number"
+            },
+            "totalAmount": {
+              "type": "number"
+            },
+            "preTaxAmount": {
+              "type": "number"
+            },
+            "metalType": {
+              "type": "string"
+            },
+            "rate": {
+              "type": "string"
+            },
+            "uniqueId": {
+              "type": "string"
+            },
+            "transactionId": {
+              "type": "string"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "merchantTransactionId": {
+              "type": "string"
+            },
+            "mobileNumber": {
+              "type": "string"
+            },
+            "goldBalance": {
+              "type": "string"
+            },
+            "silverBalance": {
+              "type": "string"
+            },
+            "taxes": {
+              "type": "object",
+              "properties": {
+                "totalTaxAmount": {
+                  "type": "string"
+                },
+                "taxSplit": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string"
+                      },
+                      "taxPerc": {
+                        "type": "number"
+                      },
+                      "taxAmount": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "invoiceNumber": {
+              "type": "string"
+            },
+            "referenceType": {
+              "type": "null"
+            },
+            "referenceId": {
+              "type": "null"
+            }
+          },
+          "required": false
+        },
+        "date": {
+          "type": "date",
+          "required": false
+        },
+        "augmontTransactionData": {
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "number"
+            },
+            "totalAmount": {
+              "type": "number"
+            },
+            "preTaxAmount": {
+              "type": "number"
+            },
+            "metalType": {
+              "type": "string"
+            },
+            "rate": {
+              "type": "string"
+            },
+            "uniqueId": {
+              "type": "string"
+            },
+            "transactionId": {
+              "type": "string"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "merchantTransactionId": {
+              "type": "string"
+            },
+            "mobileNumber": {
+              "type": "string"
+            },
+            "goldBalance": {
+              "type": "string"
+            },
+            "silverBalance": {
+              "type": "string"
+            }
+          },
+          "required": false
+        },
+        "withdrawalLogs": {
+          "type": "object",
+          "properties": {
+            "withdrawalInitiatedToBank": {
+              "type": "date"
+            }
+          },
+          "required": false
+        },
+        "transactionSummary": {
+          "type": "object",
+          "properties": {
+            "totalInvestedAmount": {
+              "type": "number"
+            },
+            "totalWithdrawnAmount": {
+              "type": "number"
+            },
+            "lastTransactionDate": {
+              "type": "date"
+            },
+            "investmentType": {
+              "type": "string"
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 5069
+    },
+    {
+      "collectionName": "payout-benificiaries",
+      "fields": {
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "active": {
+          "type": "boolean",
+          "required": true
+        },
+        "accountNumber": {
+          "type": "string",
+          "required": true
+        },
+        "ifscCode": {
+          "type": "string",
+          "required": true
+        },
+        "beneficiaryName": {
+          "type": "string",
+          "required": true
+        },
+        "phoneNumber": {
+          "type": "string",
+          "required": true
+        },
+        "email": {
+          "type": "string",
+          "required": true
+        },
+        "transferType": {
+          "type": "string",
+          "required": true
+        },
+        "syncedWithDecentro": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 7
+    },
+    {
+      "collectionName": "goal-investors-notifications-histories",
+      "fields": {},
+      "totalDocuments": 0
+    },
+    {
+      "collectionName": "shorts",
+      "fields": {
+        "link": {
+          "type": "string",
+          "required": true
+        },
+        "thumbnail": {
+          "type": "string",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "goal_id": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": false
+        }
+      },
+      "totalDocuments": 35
+    },
+    {
+      "collectionName": "lotterytickets",
+      "fields": {
+        "validTill": {
+          "type": "string",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "ticketNumber": {
+          "type": "string",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        }
+      },
+      "totalDocuments": 18
+    },
+    {
+      "collectionName": "rewards",
+      "fields": {
+        "transactionType": {
+          "type": "string",
+          "required": true
+        },
+        "rewardType": {
+          "type": "string",
+          "required": true
+        },
+        "offerData": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "amount": {
+              "type": "string"
+            },
+            "offerId": {
+              "type": "object",
+              "properties": {
+                "buffer": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "number"
+                    },
+                    "1": {
+                      "type": "number"
+                    },
+                    "2": {
+                      "type": "number"
+                    },
+                    "3": {
+                      "type": "number"
+                    },
+                    "4": {
+                      "type": "number"
+                    },
+                    "5": {
+                      "type": "number"
+                    },
+                    "6": {
+                      "type": "number"
+                    },
+                    "7": {
+                      "type": "number"
+                    },
+                    "8": {
+                      "type": "number"
+                    },
+                    "9": {
+                      "type": "number"
+                    },
+                    "10": {
+                      "type": "number"
+                    },
+                    "11": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "allotmentFrequency": {
+              "type": "string"
+            },
+            "allotmentFractionAmount": {
+              "type": "string"
+            },
+            "nextAllotmentDate": {
+              "type": "date"
+            },
+            "payoutMedium": {
+              "type": "string"
+            },
+            "amountAllotments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "string"
+                  },
+                  "allottedAt": {
+                    "type": "date"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "goldInvestedQuantity": {
+              "type": "string"
+            }
+          },
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "required": true
+        },
+        "description": {
+          "type": "string",
+          "required": true
+        },
+        "lockInDuration": {
+          "type": "string",
+          "required": true
+        },
+        "payoutDate": {
+          "type": "date",
+          "required": true
+        },
+        "userId": {
+          "type": "object",
+          "properties": {
+            "buffer": {
+              "type": "object",
+              "properties": {
+                "0": {
+                  "type": "number"
+                },
+                "1": {
+                  "type": "number"
+                },
+                "2": {
+                  "type": "number"
+                },
+                "3": {
+                  "type": "number"
+                },
+                "4": {
+                  "type": "number"
+                },
+                "5": {
+                  "type": "number"
+                },
+                "6": {
+                  "type": "number"
+                },
+                "7": {
+                  "type": "number"
+                },
+                "8": {
+                  "type": "number"
+                },
+                "9": {
+                  "type": "number"
+                },
+                "10": {
+                  "type": "number"
+                },
+                "11": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "status": {
+          "type": "string",
+          "required": true
+        },
+        "createdAt": {
+          "type": "date",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "date",
+          "required": true
+        },
+        "__v": {
+          "type": "number",
+          "required": true
+        }
+      },
+      "totalDocuments": 776
+    }
+  ]
+}
