@@ -1,10 +1,12 @@
 import { OpenAI } from 'openai';
 import { DatabaseSchema } from '../types/schema.types';
 import { DatabaseContext, QueryResult } from '../types/ai.types';
-import { MongoClient } from 'mongodb';
 import * as fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
+import { executeMongoQuery } from '../helpers/mongo.helper';
+import { generateAIResponse } from '../helpers/ai.helper';
+import { parseMongoQuery } from '../helpers/query.helper';
 
 // Ensure environment variables are loaded
 dotenv.config();
@@ -78,74 +80,21 @@ class AIService {
   }
 
   async generateMongoQuery(query: string): Promise<QueryResult> {
-    const context = JSON.parse(await fs.readFile(this.contextPath, 'utf-8'));
-    const savedAnalysis = await this.loadSchemaAnalysis();
-    const schema = savedAnalysis || JSON.parse(await fs.readFile(this.schemaPath, 'utf-8'));
-
-    const prompt = `Given this database context and schema:
-    Context: ${JSON.stringify(context, null, 2)}
-    Schema: ${JSON.stringify(schema, null, 2)}
-
-    Generate a MongoDB query for this natural language request: "${query}"
-    
-    Return a JSON object with:
-    1. mongoQuery: the MongoDB query as a string
-    2. explanation: explanation of how the query works
-    `;
-
-    const completion = await this.openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      response_format: { type: "json_object" },
-      messages: [{ role: 'user', content: prompt }],
-      temperature: 0.5,
-    });
-    const response = JSON.parse(completion.choices[0].message.content || '{}');
-    console.log(response);
-    const mongoUri = process.env.MONGODB_URI;
-    const client = new MongoClient(mongoUri || '');
     try {
-      await client.connect();
-      const db = client.db();
-      
-      const queryStr = response.mongoQuery;
-      
-      // Updated regex to better handle collection names with hyphens
-      const collectionMatch = queryStr.match(/db\.(['"]?)([^.'"\s]+)\1\.(aggregate|find|findOne|update|delete)/);
-      
-      if (!collectionMatch) {
-        throw new Error('Invalid query format');
-      }
+      // Get context and schema
+      const context = JSON.parse(await fs.readFile(this.contextPath, 'utf-8'));
+      const savedAnalysis = await this.loadSchemaAnalysis();
+      const schema = savedAnalysis || JSON.parse(await fs.readFile(this.schemaPath, 'utf-8'));
 
-      const [, , collectionName, operation] = collectionMatch;
-     
-      const collection = db.collection(collectionName);
-
-      let results: any[] = [];  // Initialize as empty array
-      if (operation === 'aggregate') {
-        const pipelineMatch = queryStr.match(/aggregate\(([\s\S]*)\)/);
-        if (!pipelineMatch) {
-          throw new Error('Invalid aggregate query format');
-        }
-        const pipelineStr = pipelineMatch[1];
-        console.log(pipelineStr, "pipelineStr");
-        
-        // Evaluate the pipeline string directly since it's already in valid array format
-        const pipeline = eval(pipelineStr);
-        console.log('Pipeline:', pipeline);
-        results = await collection.aggregate(pipeline).toArray();
-      } else if (operation === 'find' || operation === 'findOne') {
-        const queryMatch = queryStr.match(/find(?:One)?\((.*)\)/);
-        if (!queryMatch) {
-          throw new Error('Invalid find query format');
-        }
-        const queryParams = queryMatch[1] ? JSON.parse(queryMatch[1]) : {};
-        results = operation === 'find' 
-          ? await collection.find(queryParams).toArray()
-          : await collection.findOne(queryParams) ? [await collection.findOne(queryParams)] : [];
-      } else {
-        throw new Error('Unsupported query operation');
-      }
+      // Generate query using AI
+      const response = await generateAIResponse(query, context, schema);
       
+      // Parse the query
+      const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
+      
+      // Execute the query
+      const results = await executeMongoQuery(collectionName, operation, params);
+
       return {
         mongoQuery: response.mongoQuery,
         explanation: response.explanation,
@@ -158,8 +107,6 @@ class AIService {
         explanation: 'Query execution failed: ' + (error instanceof Error ? error.message : String(error)),
         results: []
       };
-    } finally {
-      await client.close();
     }
   }
 
