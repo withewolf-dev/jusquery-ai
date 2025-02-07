@@ -7,6 +7,7 @@ export interface FieldInfo {
   required?: boolean;
   items?: FieldInfo;  // For array types
   properties?: { [key: string]: FieldInfo };  // For object types
+  additionalProperties?: FieldInfo;  // For maps/dynamic objects
 }
 
 export interface CollectionSchema {

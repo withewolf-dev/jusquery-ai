@@ -21,6 +21,8 @@ export interface QueryResult {
   mongoQuery: string;
   explanation: string;
   results: any[];
+  needsClarification: boolean;
+  clarificationMessage?: string;
 }
 
 export interface ClarificationResponse {

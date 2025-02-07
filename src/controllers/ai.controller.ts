@@ -48,9 +48,9 @@ class AIController {
 
   async executeQuery(req: Request, res: Response) {
     try {
-      const { query, selectedOption } = req.body as { 
-        query: string; 
-        selectedOption?: string;
+      const { query, proceed } = req.body as { 
+        query: string;
+        proceed?: boolean;
       };
       
       if (!query) {
@@ -58,6 +58,25 @@ class AIController {
       }
 
       const result = await aiService.generateMongoQuery(query);
+
+      if (result.needsClarification && proceed === undefined) {
+        return res.json({
+          needsClarification: true,
+          message: result.clarificationMessage,
+          options: {
+            proceed: true,
+            cancel: false
+          }
+        });
+      }
+
+      if (proceed === false) {
+        return res.json({
+          message: 'Query cancelled as per user request',
+          success: false
+        });
+      }
+
       return res.json(result);
 
     } catch (error: any) {

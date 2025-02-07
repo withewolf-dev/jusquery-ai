@@ -5,8 +5,9 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
 import { executeMongoQuery } from '../helpers/mongo.helper';
-import { generateAIResponse } from '../helpers/ai.helper';
+import { generateAIResponse, generateIntentBasedQuery } from '../helpers/ai.helper';
 import { parseMongoQuery } from '../helpers/query.helper';
+import { analyzeQueryRequirements } from '../helpers/ai.helper';
 
 // Ensure environment variables are loaded
 dotenv.config();
@@ -99,23 +100,38 @@ class AIService {
       const savedAnalysis = await this.loadSchemaAnalysis();
       const schema = savedAnalysis || JSON.parse(await fs.readFile(this.schemaPath, 'utf-8'));
 
+      // First, analyze if we can proceed with the query
+      // const analysis = await analyzeQueryRequirements(query, context, schema);
+      
+      // if (!analysis.canProceed) {
+      //   return {
+      //     mongoQuery: '',
+      //     explanation: analysis.reasoning,
+      //     results: [],
+      //     needsClarification: true,
+      //     clarificationMessage: analysis.suggestedClarification
+      //   };
+      // }
 
-      const response = await generateAIResponse(query, context, schema);
-      console.log('generateAIResponse()->:', response);
+      // If we can proceed, generate the query
+      const response = await generateIntentBasedQuery(query, context, schema);
+      console.log('generateIntentBasedQuery()->:', response);
       const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
       const results = await executeMongoQuery(collectionName, operation, params);
 
       return {
         mongoQuery: response.mongoQuery,
         explanation: response.explanation,
-        results
+        results,
+        needsClarification: false
       };
     } catch (error) {
       console.error('Query execution error:', error);
       return {
         mongoQuery: '',
         explanation: 'Query execution failed: ' + (error instanceof Error ? error.message : String(error)),
-        results: []
+        results: [],
+        needsClarification: false
       };
     }
   }
