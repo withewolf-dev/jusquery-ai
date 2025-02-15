@@ -1,0 +1,3 @@
+write a prompt to generate schema_analysis.json with more define if possible.
+convert that json into a text/csv/pdf file give it more context and information, this process is what we are calling building story, story is giving the json and asking llm to explain this mongodb schema where it can be used, and give it some example queries and the store it. 
+later query the vector database with natural language queries. 

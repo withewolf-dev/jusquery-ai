@@ -20,7 +20,7 @@ export interface NLQueryRequest {
 export interface QueryResult {
   mongoQuery: string;
   explanation: string;
-  results: any[];
+  //results: any[];
   needsClarification: boolean;
   clarificationMessage?: string;
 }

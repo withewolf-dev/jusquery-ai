@@ -5,9 +5,8 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
 import { executeMongoQuery } from '../helpers/mongo.helper';
-import { generateAIResponse, generateIntentBasedQuery } from '../helpers/ai.helper';
+import { generateAIResponse } from '../helpers/ai.helper';
 import { parseMongoQuery } from '../helpers/query.helper';
-import { analyzeQueryRequirements } from '../helpers/ai.helper';
 
 // Ensure environment variables are loaded
 dotenv.config();
@@ -50,29 +49,36 @@ class AIService {
   async generateContext(schema: DatabaseSchema): Promise<DatabaseContext> {
     const savedAnalysis = await this.loadSchemaAnalysis();
     const schemaToUse = savedAnalysis || schema;
-
     const systemPrompt = `
-    You are an expert MongoDB schema analyst and AI assistant specialized in understanding complex database structures.
-    Your goal is to generate comprehensive database contexts that help convert natural language queries into accurate MongoDB queries.
-    Focus on identifying relationships, potential ambiguities, and providing clear disambiguation strategies when collections have overlapping data.
-    Ensure your output is structured, precise, and adheres to the DatabaseContext interface.
+    You are a MongoDB schema expert and an AI assistant skilled in analyzing and summarizing complex database structures.
+    Your goal is to transform a large MongoDB schema into a summarized, structured context suitable for generating accurate queries and understanding relationships between collections.
+    Ensure that your response is concise, structured as JSON, and follows the specified format.
+    
+    Focus on:
+    1. Extracting collection names and their primary fields.
+    2. Identifying relationships between collections.
+    3. Providing a high-level description of the database.
+    4. Ignoring unnecessary sample data or deeply nested objects.
+    
+    Format your response like this:
+    
+    {
+      "overallDatabaseDescription": "High-level overview of what the database is used for.",
+      "collections": [
+        {
+          "name": "collection_name",
+          "fields": ["field_name (data_type)", "field_name (data_type)"],
+          "relationships": ["Describe how this collection relates to others, e.g., field_name links to another_collection.field_name"]
+        }
+      ]
+    }
     `;
     
-    const userPrompt = `
-    Analyze this MongoDB schema and generate a comprehensive context:
+    const userPrompt =  `
+    Analyze the following MongoDB schema and generate a summarized context according to the specified format:
     ${JSON.stringify(schemaToUse, null, 2)}
-    
-    Generate a detailed analysis including:
-    1. **Overall Database Description:** High-level overview of the database's purpose.
-    2. **Relationships Between Collections:** Describe explicit and implicit relationships (foreign key-like, common fields, etc.).
-    3. **Purpose of Each Collection:** Define the primary goal of each collection.
-    4. **Description of Important Fields:** Focus on key fields for queries, filtering, and aggregation.
-    5. **Sample Queries:** Provide realistic MongoDB queries based on potential user needs.
-    6. **Disambiguation Notes:** Address overlapping data scenarios (e.g., transactions vs. goal-investor) and provide differentiation strategies.
-    7. **Intent Mapping:** Suggest how different user intents map to relevant collections.
-    
-    Format the response as a JSON object matching the DatabaseContext interface.
     `;
+    
 
     const completion = await this.openai.chat.completions.create({
       model: 'gpt-4o-mini',
@@ -114,15 +120,15 @@ class AIService {
       // }
 
       // If we can proceed, generate the query
-      const response = await generateIntentBasedQuery(query, context, schema);
-      console.log('generateIntentBasedQuery()->:', response);
-      const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
-      const results = await executeMongoQuery(collectionName, operation, params);
+      const response = await generateAIResponse(query);
+      console.log('generateAIResponse()->:', response);
+      // const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
+      // const results = await executeMongoQuery(collectionName, operation, params);
 
       return {
         mongoQuery: response.mongoQuery,
         explanation: response.explanation,
-        results,
+        // results,
         needsClarification: false
       };
     } catch (error) {
@@ -130,7 +136,7 @@ class AIService {
       return {
         mongoQuery: '',
         explanation: 'Query execution failed: ' + (error instanceof Error ? error.message : String(error)),
-        results: [],
+       // results: [],
         needsClarification: false
       };
     }

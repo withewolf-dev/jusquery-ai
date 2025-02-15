@@ -1,195 +1,356 @@
 {
-  "overallDescription": "The 'plutoDev' database is designed to manage financial transactions, user accounts, investment goals, and associated metadata within a financial application. It serves as a comprehensive system for tracking payments, user interactions, investment goals, and their respective statuses, enabling users to manage their financial activities efficiently.",
-  "relationships": {
-    "payment-transactions": {
-      "relatedCollections": [
-        {
-          "collectionName": "users",
-          "relationshipType": "foreign key",
-          "key": "user_id",
-          "description": "Each transaction is associated with a user, identified by user_id."
-        },
-        {
-          "collectionName": "goals",
-          "relationshipType": "foreign key",
-          "key": "goal_investor_id",
-          "description": "Transactions may reference a specific investment goal through goal_investor_id."
-        },
-        {
-          "collectionName": "payouts",
-          "relationshipType": "foreign key",
-          "key": "paymentTransactionId",
-          "description": "Links to payouts associated with a specific transaction."
-        }
+  "overallDatabaseDescription": "The 'plutoDev' database is designed to manage various financial transactions, user accounts, investment goals, and associated metadata, providing functionalities for payments, notifications, and user engagement through a structured schema.",
+  "collections": [
+    {
+      "name": "payment-transactions",
+      "fields": [
+        "retry_count (Number)",
+        "goal_investor_id (Object)",
+        "amount_in_rupees (Number)",
+        "status (String)",
+        "payment_provider (String)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": [
+        "goal_investor_id links to goals.goal_id"
       ]
     },
-    "goals": {
-      "relatedCollections": [
-        {
-          "collectionName": "goal-investors",
-          "relationshipType": "foreign key",
-          "key": "goal_id",
-          "description": "Each goal can have multiple investors associated with it."
-        },
-        {
-          "collectionName": "users",
-          "relationshipType": "foreign key",
-          "key": "user_id",
-          "description": "Goals are associated with a specific user."
-        }
+    {
+      "name": "goals",
+      "fields": [
+        "name (String)",
+        "min_investment_amt (Number)",
+        "status (String)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": [
+        "goal_id links to goal-investors.goal_id"
       ]
     },
-    "users": {
-      "relatedCollections": [
-        {
-          "collectionName": "payment-transactions",
-          "relationshipType": "foreign key",
-          "key": "user_id",
-          "description": "Users are linked to their payment transactions."
-        },
-        {
-          "collectionName": "goals",
-          "relationshipType": "foreign key",
-          "key": "user_id",
-          "description": "Users can have multiple goals."
-        }
+    {
+      "name": "users",
+      "fields": [
+        "name (String)",
+        "email (String)",
+        "isActive (Boolean)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": [
+        "user_id links to payment-transactions.user_id",
+        "user_id links to goals.user_id"
       ]
     },
-    "payouts": {
-      "relatedCollections": [
-        {
-          "collectionName": "users",
-          "relationshipType": "foreign key",
-          "key": "user_id",
-          "description": "Payouts are associated with specific users."
-        },
-        {
-          "collectionName": "payment-transactions",
-          "relationshipType": "foreign key",
-          "key": "paymentTransactionId",
-          "description": "Payouts can be linked to specific payment transactions."
-        }
+    {
+      "name": "whatsapp-otps",
+      "fields": [
+        "phoneNumber (String)",
+        "otp (String)",
+        "createdAt (Date)",
+        "expireAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "payout-statuses",
+      "fields": [
+        "verified (Boolean)",
+        "merchant_transaction_id (String)",
+        "payout_status (String)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "story-views",
+      "fields": [
+        "storyId (String)",
+        "userId (String)",
+        "viewTimestamp (Date)",
+        "duration (Number)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "story-comments",
+      "fields": [
+        "comment_id (String)",
+        "story_id (String)",
+        "user_id (String)",
+        "comment_text (String)",
+        "created_at (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "channels",
+      "fields": [
+        "channelId (String)",
+        "channelName (String)",
+        "status (String)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "referrals",
+      "fields": [
+        "active (Boolean)",
+        "termsAndConditionText (String)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "notifications",
+      "fields": [
+        "notification_id (String)",
+        "user_id (String)",
+        "message (String)",
+        "timestamp (Date)",
+        "status (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "gains",
+      "fields": [
+        "tenures (Array)",
+        "total_gain (Number)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "user",
+      "fields": [
+        "username (String)",
+        "email (String)",
+        "password (String)",
+        "created_at (Date)",
+        "status (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "invite-codes",
+      "fields": [],
+      "relationships": []
+    },
+    {
+      "name": "auth-tokens",
+      "fields": [
+        "type (String)",
+        "token (String)",
+        "createdAt (Date)",
+        "expiresAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "goal-investors",
+      "fields": [
+        "goal_id (String)",
+        "user_id (String)",
+        "amount_invested (Number)",
+        "total_gain (Number)",
+        "createdAt (Date)"
+      ],
+      "relationships": [
+        "goal_id links to goals.goal_id",
+        "user_id links to users.user_id"
       ]
+    },
+    {
+      "name": "user_models",
+      "fields": [
+        "username (String)",
+        "email (String)",
+        "password_hash (String)",
+        "created_at (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "callbackrequests",
+      "fields": [
+        "emailSent (Boolean)",
+        "attended (Boolean)",
+        "createdAt (Date)",
+        "updatedAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "ledger-files",
+      "fields": [
+        "date (Date)",
+        "transaction_type (String)",
+        "filePath (String)",
+        "total_amount (Number)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "otps",
+      "fields": [
+        "otp (String)",
+        "user_id (String)",
+        "created_at (Date)",
+        "expires_at (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "stock-orders",
+      "fields": [
+        "orderId (String)",
+        "userId (String)",
+        "stockSymbol (String)",
+        "quantity (Number)",
+        "price (Number)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "payout-partner",
+      "fields": [
+        "partner_id (String)",
+        "payout_amount (Number)",
+        "status (String)",
+        "created_at (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "payouts",
+      "fields": [
+        "userId (String)",
+        "total (Number)",
+        "status (String)",
+        "createdAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "payouts-partners",
+      "fields": [
+        "active (Boolean)",
+        "partner_name (String)",
+        "account_number (String)",
+        "ifsc_code (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "user-followers",
+      "fields": [
+        "follower_id (String)",
+        "followed_user_id (String)",
+        "follow_date (Date)",
+        "status (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "testCollection",
+      "fields": [
+        "retryCount (Number)",
+        "status (String)",
+        "amount (Number)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "test-p-t",
+      "fields": [
+        "retry_count (Number)",
+        "goal_investor_id (Object)",
+        "amount_in_rupees (Number)",
+        "status (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "goal-based-payouts",
+      "fields": [
+        "userId (String)",
+        "total (Number)",
+        "status (String)",
+        "createdAt (Date)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "translations",
+      "fields": [
+        "hindi (String)",
+        "english (String)",
+        "key (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "transactions",
+      "fields": [
+        "status (String)",
+        "amount (Number)",
+        "userId (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "payout-benificiaries",
+      "fields": [
+        "userId (String)",
+        "accountNumber (String)",
+        "ifscCode (String)",
+        "beneficiaryName (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "goal-investors-notifications-histories",
+      "fields": [
+        "notification_id (String)",
+        "investor_id (String)",
+        "goal_id (String)",
+        "status (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "shorts",
+      "fields": [
+        "link (String)",
+        "thumbnail (String)",
+        "title (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "lotterytickets",
+      "fields": [
+        "validTill (Date)",
+        "userId (Object)",
+        "ticketNumber (String)"
+      ],
+      "relationships": []
+    },
+    {
+      "name": "rewards",
+      "fields": [
+        "transactionType (String)",
+        "rewardType (String)",
+        "offerData (Object)"
+      ],
+      "relationships": []
     }
-  },
-  "collectionPurposes": {
-    "payment-transactions": "To store and manage all payment-related transactions, including their statuses and metadata.",
-    "goals": "To define and track investment goals set by users, including their progress and requirements.",
-    "users": "To maintain user profiles and their associated information, including preferences and verification statuses.",
-    "payouts": "To manage all payout transactions to users.",
-    "whatsapp-otps": "To store OTP requests made via WhatsApp for user verification.",
-    "payout-statuses": "To track the statuses of payouts made to users.",
-    "story-views": "To log views on stories posted within the application.",
-    "story-comments": "To manage user comments on stories.",
-    "channels": "To maintain information about channels for user engagement.",
-    "referrals": "To manage referral programs and their conditions.",
-    "notifications": "To manage notifications sent to users regarding various events.",
-    "gains": "To track financial gains associated with investment goals.",
-    "user": "To manage user authentication and profile information.",
-    "invite-codes": "To handle invite codes for user registration.",
-    "auth-tokens": "To manage authentication tokens for user sessions.",
-    "goal-investors": "To track investors associated with specific investment goals.",
-    "ledger-files": "To store and manage ledger files associated with transactions.",
-    "otps": "To manage OTPs for user authentication.",
-    "stock-orders": "To manage orders placed by users for stock transactions.",
-    "payout-partner": "To maintain information about payout partners.",
-    "user-followers": "To track followers of users within the application.",
-    "testCollection": "To manage test data related to transactions.",
-    "payout-beneficiaries": "To manage beneficiaries associated with payouts.",
-    "payments": "To manage payment records and their statuses.",
-    "usermodels": "To manage user models for authentication.",
-    "goldpriceschemas": "To maintain historical data about gold prices.",
-    "channel-followers": "To track followers of channels.",
-    "bank-account-details": "To manage bank account information for users.",
-    "offers": "To manage promotional offers available to users.",
-    "ledger-files-transactions": "To manage transactions recorded in ledger files.",
-    "payoutmodels": "To define models for handling payouts.",
-    "pre-approved-bonus": "To manage pre-approved bonuses for users.",
-    "goal": "To track specific goals associated with users.",
-    "sips": "To manage systematic investment plans for users.",
-    "test-p-t": "To manage test data related to payment transactions.",
-    "lotterytickets": "To manage lottery ticket information.",
-    "rewards": "To manage rewards associated with user transactions."
-  },
-  "importantFields": {
-    "payment-transactions": [
-      {
-        "field": "amount_in_rupees",
-        "description": "The total amount of the transaction in Indian Rupees."
-      },
-      {
-        "field": "status",
-        "description": "The current status of the payment transaction."
-      },
-      {
-        "field": "goal_investor_id",
-        "description": "The investor associated with the payment goal."
-      }
-    ],
-    "goals": [
-      {
-        "field": "name",
-        "description": "The name of the investment goal."
-      },
-      {
-        "field": "min_investment_amt",
-        "description": "The minimum investment required to participate in the goal."
-      },
-      {
-        "field": "status",
-        "description": "Indicates whether the goal is currently active or inactive."
-      }
-    ],
-    "users": [
-      {
-        "field": "email",
-        "description": "The user's email address for contact and notifications."
-      },
-      {
-        "field": "isActive",
-        "description": "Indicates whether the user's account is currently active."
-      }
-    ],
-    "payouts": [
-      {
-        "field": "total",
-        "description": "The total amount of the payout."
-      },
-      {
-        "field": "status",
-        "description": "Current status of the payout."
-      }
-    ]
-  },
-  "sampleQueries": {
-    "getAllActiveGoals": {
-      "query": "db.goals.find({ status: 'active' })",
-      "description": "Fetch all active investment goals."
-    },
-    "getUserTransactions": {
-      "query": "db.payment-transactions.find({ user_id: ObjectId('user_id_here') })",
-      "description": "Retrieve all payment transactions for a specific user."
-    },
-    "getPayoutsByUser": {
-      "query": "db.payouts.find({ userId: ObjectId('user_id_here') })",
-      "description": "Get all payouts associated with a specific user."
-    }
-  },
-  "disambiguationNotes": {
-    "transaction vs goal-investor": "Both collections may contain references to users and amounts. Use specific fields such as 'goal_investor_id' in 'payment-transactions' to differentiate between a transaction related to a goal and an investor's performance data."
-  },
-  "intentMapping": {
-    "viewTransactions": {
-      "collection": "payment-transactions",
-      "description": "User wants to view their past transactions."
-    },
-    "investInGoal": {
-      "collection": "goals",
-      "description": "User intends to invest in a specific financial goal."
-    },
-    "checkPayoutStatus": {
-      "collection": "payouts",
-      "description": "User wants to check the status of their payouts."
-    }
-  }
+  ]
 }
