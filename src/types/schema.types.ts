@@ -3,11 +3,12 @@ export interface DatabaseConfig {
 }
 
 export interface FieldInfo {
-  type: string;
+  type: 'string' | 'number' | 'boolean' | 'object' | 'array' | 'null' | 'date' | 'binary' | 'ObjectId' | 'enum' | 'unknown';
   required?: boolean;
   items?: FieldInfo;  // For array types
   properties?: { [key: string]: FieldInfo };  // For object types
   additionalProperties?: FieldInfo;  // For maps/dynamic objects
+  values?: string[];  // For enum types
 }
 
 export interface CollectionSchema {
