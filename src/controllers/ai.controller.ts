@@ -87,22 +87,6 @@ class AIController {
       });
     }
   }
-
-  async testOpenAI(req: Request, res: Response) {
-    try {
-      const result = await aiService.testOpenAI();
-      res.json({
-        message: 'OpenAI API test successful',
-        result
-      });
-    } catch (error: any) {
-      console.error('OpenAI test error:', error);
-      res.status(500).json({
-        error: 'OpenAI API test failed',
-        details: error.message
-      });
-    }
-  }
 }
 
 export default new AIController(); 

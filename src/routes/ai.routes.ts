@@ -10,6 +10,5 @@ router.post('/context', aiController.generateContext);
 router.post('/query', aiController.executeQuery);
 
 // GET /api/ai/test - Test OpenAI API functionality
-router.get('/test', aiController.testOpenAI);
 
 export default router; 

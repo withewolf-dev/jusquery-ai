@@ -5,9 +5,8 @@ import * as fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
 import { executeMongoQuery } from '../helpers/mongo.helper';
-import { generateAIResponse, generateIntentBasedQuery } from '../helpers/ai.helper';
+import { generateAIResponse } from '../helpers/ai.helper';
 import { parseMongoQuery } from '../helpers/query.helper';
-import { analyzeQueryRequirements } from '../helpers/ai.helper';
 
 // Ensure environment variables are loaded
 dotenv.config();
@@ -17,7 +16,7 @@ class AIService {
   private contextPath: string;
   private schemaPath: string;
   private analysisPath: string;
-
+  private schemaContext: string;
   constructor() {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
@@ -31,6 +30,7 @@ class AIService {
     this.contextPath = path.join(__dirname, '../../data/context.json');
     this.schemaPath = path.join(__dirname, '../../data/schema.json');
     this.analysisPath = path.join(__dirname, '../../data/schema_analysis.json');
+    this.schemaContext = path.join(__dirname, '../../data/schema_context.json');
   }
 
   private async loadSchemaAnalysis(): Promise<DatabaseSchema | null> {
@@ -42,6 +42,13 @@ class AIService {
     }
   }
 
+  private async loadSchemaContext(): Promise<string> {
+  
+      const data = await fs.readFile(this.schemaContext, 'utf-8');
+      const parsedData = JSON.parse(data);
+      return parsedData['context'];
+    
+  }
   async saveSchema(schema: DatabaseSchema): Promise<void> {
     await fs.mkdir(path.dirname(this.schemaPath), { recursive: true });
     await fs.writeFile(this.schemaPath, JSON.stringify(schema, null, 2));
@@ -98,6 +105,7 @@ class AIService {
     try {
       const context = JSON.parse(await fs.readFile(this.contextPath, 'utf-8'));
       const savedAnalysis = await this.loadSchemaAnalysis();
+      const schemaContext = await this.loadSchemaContext();
       const schema = savedAnalysis || JSON.parse(await fs.readFile(this.schemaPath, 'utf-8'));
 
       // First, analyze if we can proceed with the query
@@ -114,7 +122,7 @@ class AIService {
       // }
 
       // If we can proceed, generate the query
-      const response = await generateIntentBasedQuery(query, context, schema);
+      const response = await generateAIResponse(query, schemaContext);
       console.log('generateIntentBasedQuery()->:', response);
       const { collectionName, operation, params } = parseMongoQuery(response.mongoQuery);
       const results = await executeMongoQuery(collectionName, operation, params);
@@ -136,52 +144,8 @@ class AIService {
     }
   }
 
-  
 
-  async testOpenAI(): Promise<any> {
-    const systemPrompt = `The user will provide some exam text. Please parse the "question" and "answer" and output them in JSON format. 
 
-EXAMPLE INPUT: 
-Which is the highest mountain in the world? Mount Everest.
-
-EXAMPLE JSON OUTPUT:
-{
-    "question": "Which is the highest mountain in the world?",
-    "answer": "Mount Everest"
-}`;
-
-    const userPrompt = "Which is the longest river in the world? The Nile River.";
-
-    try {
-      console.log('Making test API call to OpenAI...');
-      const completion = await this.openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userPrompt }
-        ],
-        response_format: { type: "json_object" }
-      });
-
-      console.log('Raw API Response:', completion);
-      
-      if (!completion.choices[0]?.message?.content) {
-        throw new Error('Empty response from OpenAI API');
-      }
-
-      const content = completion.choices[0].message.content;
-      console.log('Response content:', content);
-      
-      return JSON.parse(content);
-    } catch (error: any) {
-      console.error('OpenAI Test Error:', {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
-      throw new Error(`OpenAI test failed: ${error.message}`);
-    }
-  }
 
   async  enrichFieldsWithOpenAI(fields: any, collectionName: string) {
     const systemPrompt = `
